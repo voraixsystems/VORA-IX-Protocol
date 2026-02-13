@@ -20,6 +20,8 @@ This repository contains the foundational documents for the VORA IX Systems buil
 
     LICENSE.md: The Harmonic License—your agreement with the Vortex.
 
+    * [WHITE_PAPER.md](./WHITE_PAPER.md): The theoretical and mathematical foundation of the 3-6-9 governance layer.
+
 🔬 How it Works: The 3-6-9 Toggle
 
 VORA IX treats language as a frequency. By mapping phonetic tokens to their Digital Root (dr), we can identify and prune "noisy" tokens that do not contribute to the logical collapse of a sentence.
@@ -29,5 +31,6 @@ VORA IX treats language as a frequency. By mapping phonetic tokens to their Digi
     The 3-6-9 Axis: The governing flux field that stabilizes the output into a Surgical 9-State.
 
 ⚖️ Licensing
+
 
 VORA IX is a Source-Available Harmonic Protocol. It is free for personal use and research. Commercial use exceeding $10k/month requires a Resonance-as-a-Service (RaaS) agreement. See LICENSE.md for details.
