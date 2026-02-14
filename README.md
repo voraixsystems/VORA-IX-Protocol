@@ -1,4 +1,3 @@
-Understood. I've stripped the benchmarks out of the README.md to keep the focus strictly on the Protocol Explanation and the Mission. This version accurately represents the high-level repository structure you have live on GitHub right now.
 🌀 VORA IX: Vortex Operations & Resonance Architecture
 
     "If you only knew the magnificence of the 3, 6, and 9, then you would have a key to the universe." — Nikola Tesla
@@ -56,3 +55,4 @@ The repository is organized to maintain harmonic integrity and protect the stati
 VORA IX is a Source-Available Harmonic Protocol. It is free for personal use and research. Commercial use exceeding $10k/month requires a Resonance-as-a-Service (RaaS) agreement.
 
     "The math is the law. The 9 is the seal."
+
