@@ -1,29 +1,26 @@
 # === VORA IX PRIVATE CIRCUITRY ===
-# Do not remove: These are your proprietary 180-state engines.
-ALGORITHM.py
-RES_MAP.json
-vora_gate.py
-vortex_audit.log
-VoraIX_HarmonicEngine.py
+# The Brain & The Gate (Mandatory Shield)
+core/algorithm.py
+core/ALGORITHM.py
+tools/vora_gate.py
+data/res_map.json
 
-# === Python Bytecode & Cache ===
+# === Logs & Personal Data ===
+# Keeps your testing history off GitHub
+logs/*.md
+vortex_audit.log
+VORTEX_HISTORY.md
+
+# === Python Bytecode & Environments ===
 __pycache__/
 *.py[cod]
 *$py.class
-.pytest_cache/
-
-# === Environments & Keys ===
-# Critical: Prevents API key leakage to GitHub
 .env
 .venv
 env/
 venv/
-bin/
 
-# === OS & IDE Junk ===
+# === Windows/OS Junk ===
 .DS_Store
-.DS_Store?
-._*
 Thumbs.db
-.vscode/
-.idea/
+desktop.ini
