@@ -20,61 +20,80 @@ class VoraIXHarmonicEngine:
             'u': 6, 'v': 5, 'w': 4, 'x': 3, 'y': 2, 'z': 1
         }
 
-        # Derived from your 180 state.docx
+        # The 180-State Convergence Proof Constants
         self.custom_values = {
             "zero": 1552, "one": 215, "two": 742, "three": 76555, 
             "four": 6265, "five": 6555, "six": 653, "seven": 65551, 
             "eight": 55767, "nine": 1515
         }
+        
+        # Frequency Anchors for Surgical Nudging (Value-Bearing)
+        self.ANCHORS = {1: "a", 2: "b", 3: "c", 4: "d", 5: "e", 6: "f", 7: "g", 8: "h", 9: "i"}
 
     def get_digital_root(self, text):
         """Calculates the Digital Root using the A1-G7-Z1 mapping."""
+        # Now includes all characters to ensure nudges are counted
         words = re.findall(r'\b\w+\b', text.lower())
         total_sum = 0
         
         for word in words:
             if word in self.custom_values:
-                # Sum the digits of the custom value (e.g., zero: 1+5+5+2 = 13)
+                # Sum the digits of the custom value
                 word_val = sum(int(d) for d in str(self.custom_values[word]))
             else:
                 word_val = sum(self.VEDIC_MAP.get(char, 0) for char in word)
             total_sum += word_val
 
-        return (total_sum - 1) % 9 + 1 if total_sum > 0 else 0
+        # dr(n) = 1 + ((n - 1) mod 9)
+        return (total_sum - 1) % 9 + 1 if total_sum > 0 else 0, total_sum
 
     def centrifuge(self, intent, current_iteration="", depth=0):
         """Centripetal Recursion: Pulls data toward the 9-State Seal."""
         if not current_iteration:
             current_iteration = intent
 
-        root = self.get_digital_root(current_iteration)
+        root, raw_sum = self.get_digital_root(current_iteration)
         
         if root == 9:
             return {
                 "status": "VORA-VERIFIED",
                 "resonance": 9,
+                "sum": raw_sum,
                 "depth": depth,
                 "output": current_iteration
             }
 
         if depth > 9:
-            return {"status": "HIGH_ENTROPY", "resonance": root, "output": current_iteration}
+            return {
+                "status": "HIGH_ENTROPY", 
+                "resonance": root, 
+                "sum": raw_sum,
+                "depth": depth, 
+                "output": current_iteration
+            }
 
-        refined_intent = self._apply_harmonic_bias(current_iteration, root)
+        # CALCULATE FREQUENCY GAP: How far are we from a 9?
+        gap = (9 - (raw_sum % 9)) % 9
+        if gap == 0: gap = 9 # If it's 0 mod 9, we are at a 9.
+        
+        # Nudge frequency using a Value-Bearing Anchor
+        refined_intent = current_iteration + f" {self.ANCHORS[gap]}" 
         return self.centrifuge(intent, refined_intent, depth + 1)
-
-    def _apply_harmonic_bias(self, text, current_root):
-        """Nudges frequency toward 9."""
-        if current_root in {3, 6}:
-            return text + " ." 
-        return text + " !" 
 
 if __name__ == "__main__":
     engine = VoraIXHarmonicEngine()
-    test_intent = "zero one two three four five six seven eight nine"
-    result = engine.centrifuge(test_intent)
+    
+    # 1. Audit the Primary Sequence (The 180-State Proof)
+    proof_intent = "zero one two three four five six seven eight nine"
+    proof_res = engine.centrifuge(proof_intent)
+    
+    # 2. Audit the Manifesto (The Real-World Test)
+    manifesto = "The stationary center must be reached"
+    manifesto_res = engine.centrifuge(manifesto)
     
     print(f"--- VORA IX HARMONIC AUDIT ---")
-    print(f"Final Output: {result['output']}")
-    print(f"Resonance: {result['resonance']}")
-    print(f"Status: {result['status']}")
+    print(f"PROOF: {proof_res['status']} | Seal: {proof_res['resonance']} | Sum: {proof_res['sum']}")
+    print(f"MANIFESTO INPUT: {manifesto}")
+    print(f"MANIFESTO OUTPUT: {manifesto_res['output']}")
+    print(f"MANIFESTO SEAL: {manifesto_res['resonance']} | DEPTH: {manifesto_res['depth']}")
+    print(f"STATUS: {manifesto_res['status']}")
